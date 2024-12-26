@@ -11,7 +11,7 @@ app.use(cors());
 // app.use('/api/products', ProductRoutes);
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Project Demo Setup 🎈');
+  res.send('Blog Application is Running 🎈');
 });
 
 // console.log(process.cwd());
