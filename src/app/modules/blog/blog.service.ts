@@ -54,7 +54,17 @@ const updateBlog = async (
   return result;
 };
 
+const deleteBlog = async (id: string) => {
+  const blog = await Blog.findOne({ _id: id });
+  if (!blog) {
+    throw new AppError(403, 'This blog is not exists');
+  }
+  const result = await Blog.findByIdAndDelete(id);
+  return result;
+};
+
 export const blogService = {
   createBlog,
   updateBlog,
+  deleteBlog,
 };
