@@ -14,7 +14,7 @@ blogRouters.post(
   blogController.createBlog,
 );
 
-// blogRouters.patch('/:id', auth(USER_ROLE.user), blogController.updateBlog);
+blogRouters.patch('/:id', auth(USER_ROLE.user), blogController.updateBlog);
 // blogRouters.delete(
 //   '/:id',
 //   auth(USER_ROLE.admin, USER_ROLE.user),
