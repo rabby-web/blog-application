@@ -1,7 +1,8 @@
+
 import { Document, Types } from 'mongoose';
 import { USER_ROLE } from './user.constant';
 
-export interface TUser extends Document {
+export interface IUser extends Document {
   _id: Types.ObjectId;
   name: string;
   email: string;
@@ -10,10 +11,9 @@ export interface TUser extends Document {
   isBlocked: boolean;
 }
 
-// export interface UserModel extends Model<TUser> {
-//   isUserExists(email: string): Promise<TUser>;
-
-//   isPasswordMatched(
+// export interface UserModel extends Model<IUser> {
+//   isUserExists(email: string): Promise<IUser>;
+//   isPasswordMatch(
 //     plainTextPassword: string,
 //     hashPassword: string,
 //   ): Promise<boolean>;
