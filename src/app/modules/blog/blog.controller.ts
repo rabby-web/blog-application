@@ -20,11 +20,7 @@ const updateBlog = catchAsync(async (req, res) => {
   const updatedData = req.body;
   const userEmail = req?.user?.email;
 
-  const result = await BlogServices.updateBlogIntoDB(
-    id,
-    userEmail,
-    updatedData,
-  );
+  const result = await blogService.updateBlog(id, userEmail, updatedData);
 
   sendResponse(res, {
     statusCode: 200,
