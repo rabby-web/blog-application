@@ -7,6 +7,8 @@ import config from '../config';
 import express from 'express';
 import { TErrorSources } from '../interface/error';
 import AppError from '../errors/AppError';
+import handleZodError from '../errors/handleZodError';
+import handleValidationError from '../errors/handleValidationError';
 
 const globalErrorHandler: ErrorRequestHandler = ((
   err: any,
