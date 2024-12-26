@@ -1,5 +1,7 @@
 import { model, Schema } from 'mongoose';
 import { IUser } from './user.interface';
+import bcrypt from 'bcrypt';
+import config from '../../config';
 const userSchema = new Schema<IUser>(
   {
     name: {
@@ -40,31 +42,30 @@ const userSchema = new Schema<IUser>(
     timestamps: true,
   },
 );
+userSchema.pre('save', async function (next) {
+  this.password = await bcrypt.hash(
+    this.password,
+    Number(config.bcrypt_salt_rounds),
+  );
 
-// userSchema.pre('save', async function (next) {
-//   this.password = await bcrypt.hash(
-//     this.password,
-//     Number(config.bcrypt_salt_rounds),
-//   );
+  next();
+});
 
-//   next();
-// });
-
-// userSchema.statics.isUserExists = async function (email: string) {
-//   return await User.findOne({ email: email }).select('+password');
-// };
+userSchema.statics.isUserExists = async function (email: string) {
+  return await User.findOne({ email: email }).select('+password');
+};
 
 // set '' after saving password
 // userSchema.post('save', function (doc, next) {
 //   doc.password = '';
 //   next();
 // });
-// userSchema.statics.isPasswordMatch = async function (
-//   plainTextPassword,
-//   hashPassword,
-// ) {
-//   return await bcrypt.compare(plainTextPassword, hashPassword);
-// };
+userSchema.statics.isPasswordMatch = async function (
+  plainTextPassword,
+  hashPassword,
+) {
+  return await bcrypt.compare(plainTextPassword, hashPassword);
+};
 
 const User = model<IUser>('User', userSchema);
 export default User;
