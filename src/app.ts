@@ -11,7 +11,7 @@ app.use(cors());
 // application routes
 // app.use('/api/products', ProductRoutes);
 
-app.use('/', router);
+app.use('/api', router);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Blog Application is Running 🎈');
