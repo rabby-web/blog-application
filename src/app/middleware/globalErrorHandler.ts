@@ -6,6 +6,7 @@ import { ZodError, ZodIssue } from 'zod';
 import config from '../config';
 import express from 'express';
 import { TErrorSources } from '../interface/error';
+import AppError from '../errors/AppError';
 
 const globalErrorHandler: ErrorRequestHandler = ((
   err: any,
