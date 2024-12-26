@@ -5,9 +5,9 @@ import { StatusCodes } from 'http-status-codes';
 import config from '../config';
 import AppError from '../errors/AppError';
 import User from '../modules/user/user.model';
-import { TUserRole } from '../modules/user/user.interface';
+import { IUserRole } from '../modules/user/user.interface';
 
-const auth = (...requiredRoles: TUserRole[]) => {
+const auth = (...requiredRoles: IUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers.authorization?.split(' ')[1];
     // checking if the token is missing

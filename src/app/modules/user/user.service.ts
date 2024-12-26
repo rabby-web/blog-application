@@ -60,7 +60,35 @@ const login = async (payload: { email: string; password: string }) => {
   return { token, user };
 };
 
+const userBlock = async (userId: string, payload: Partial<IUser>) => {
+  // check user is exits
+  const user = await User.findOne({ _id: userId });
+
+  if (!user) {
+    throw new AppError(404, 'User not found!');
+  }
+
+  if (user?.role !== 'user') {
+    throw new AppError(403, "Only user roles can be blocked!");
+  }
+
+  if (user.isBlocked === true) {
+    throw new AppError(
+      400,
+      'This user is already blocked you can not blocked again!',
+    );
+  }
+
+  const result = await User.findByIdAndUpdate(userId, payload, {
+    new: true,
+    runValidators: true,
+  });
+
+  return result;
+};
+
 export const userService = {
   register,
   login,
+  userBlock,
 };

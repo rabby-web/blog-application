@@ -20,9 +20,9 @@ export interface UserModel extends Model<IUser> {
   ): Promise<boolean>;
 }
 
-export type TUserRole = keyof typeof USER_ROLE;
+export type IUserRole = keyof typeof USER_ROLE;
 
-export type TLoginUser = {
+export type ILoginUser = {
   email: string;
   password: string;
 };

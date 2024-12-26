@@ -31,13 +31,13 @@ const login = catchAsync(async (req: Request, res: Response) => {
 const userBlock = catchAsync(async (req, res) => {
   const userId = req.params.userId;
   const updatedData = req.body;
-  const result = await UserServices.blockUserIntoDB(userId, updatedData);
 
+  const result = await userService.userBlock(userId, updatedData);
   sendResponse(res, {
     statusCode: StatusCodes.ACCEPTED,
     success: true,
     message: 'User block successfully',
-    data: result?.token,
+    data: result,
   });
 });
 
