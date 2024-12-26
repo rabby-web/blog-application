@@ -1,5 +1,4 @@
 import { StatusCodes } from 'http-status-codes';
-
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { Request, Response } from 'express';
@@ -18,7 +17,7 @@ const register = catchAsync(async (req: Request, res: Response) => {
 });
 
 const login = catchAsync(async (req: Request, res: Response) => {
-  const result = await AuthService.login(req.body);
+  const result = await userService.login(req.body);
 
   sendResponse(res, {
     statusCode: StatusCodes.ACCEPTED,
