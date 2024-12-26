@@ -17,4 +17,11 @@ userRoutes.post(
   userController.login,
 );
 
+userRoutes.patch(
+  '/users/:userId/block',
+  //   auth(USER_ROLE.admin),
+  //   validateRequest(userValidationSchema.updateRegisterUserValidationSchema),
+  userController.userBlock,
+);
+
 export default userRoutes;
