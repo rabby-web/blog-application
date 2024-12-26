@@ -15,11 +15,12 @@ blogRouters.post(
 );
 
 blogRouters.patch('/:id', auth(USER_ROLE.user), blogController.updateBlog);
-// blogRouters.delete(
-//   '/:id',
-//   auth(USER_ROLE.admin, USER_ROLE.user),
-//   blogController.deleteBlog,
-// );
+
+blogRouters.delete(
+  '/:id',
+  auth(USER_ROLE.admin, USER_ROLE.user),
+  blogController.deleteBlog,
+);
 
 // blogRouters.get('/', blogController.getAllBlogs);
 
