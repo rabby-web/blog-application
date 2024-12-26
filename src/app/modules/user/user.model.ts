@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { IUser } from './user.interface';
+import { IUser, UserModel } from './user.interface';
 import bcrypt from 'bcrypt';
 import config from '../../config';
 const userSchema = new Schema<IUser>(
@@ -55,11 +55,6 @@ userSchema.statics.isUserExists = async function (email: string) {
   return await User.findOne({ email: email }).select('+password');
 };
 
-// set '' after saving password
-// userSchema.post('save', function (doc, next) {
-//   doc.password = '';
-//   next();
-// });
 userSchema.statics.isPasswordMatch = async function (
   plainTextPassword,
   hashPassword,
@@ -67,5 +62,11 @@ userSchema.statics.isPasswordMatch = async function (
   return await bcrypt.compare(plainTextPassword, hashPassword);
 };
 
-const User = model<IUser>('User', userSchema);
+const User = model<IUser, UserModel>('User', userSchema);
 export default User;
+
+// set '' after saving password
+// userSchema.post('save', function (doc, next) {
+//   doc.password = '';
+//   next();
+// });

@@ -3,7 +3,7 @@ import userRoutes from '../modules/user/user.route';
 const router = Router();
 const moduleRoutes = [
   {
-    path: '/api',
+    path: '/auth',
     route: userRoutes,
   },
 ];
