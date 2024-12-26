@@ -1,5 +1,6 @@
-
+/* eslint-disable no-unused-vars */
 import { Document, Types } from 'mongoose';
+import { Model } from 'mongoose';
 import { USER_ROLE } from './user.constant';
 
 export interface IUser extends Document {
@@ -11,13 +12,13 @@ export interface IUser extends Document {
   isBlocked: boolean;
 }
 
-// export interface UserModel extends Model<IUser> {
-//   isUserExists(email: string): Promise<IUser>;
-//   isPasswordMatch(
-//     plainTextPassword: string,
-//     hashPassword: string,
-//   ): Promise<boolean>;
-// }
+export interface UserModel extends Model<IUser> {
+  isUserExists(email: string): Promise<IUser>;
+  isPasswordMatch(
+    plainTextPassword: string,
+    hashPassword: string,
+  ): Promise<boolean>;
+}
 
 export type TUserRole = keyof typeof USER_ROLE;
 
