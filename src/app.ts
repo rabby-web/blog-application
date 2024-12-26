@@ -1,15 +1,13 @@
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import router from './app/routes';
-// import { ProductRoutes } from './app/modules/product/product.route';
+import globalErrorHandler from './app/middleware/globalErrorHandler';
+import notFound from './app/middleware/notFound';
 const app: Application = express();
 
 // parser
 app.use(express.json());
 app.use(cors());
-
-// application routes
-// app.use('/api/products', ProductRoutes);
 
 app.use('/api', router);
 
@@ -17,5 +15,7 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Blog Application is Running 🎈');
 });
 
+app.use(globalErrorHandler);
+app.use(notFound);
 // console.log(process.cwd());
 export default app;
