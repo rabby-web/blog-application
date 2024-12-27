@@ -18,19 +18,18 @@ const register = async (payload: IUser) => {
 };
 
 const login = async (payload: { email: string; password: string }) => {
-  // checking if the user is exist
   const user = await User.findOne({ email: payload?.email }).select(
     '+password',
   );
 
   if (!user) {
-    throw new AppError(StatusCodes.UNAUTHORIZED, 'Invalid credentials');
+    throw new AppError(404, 'User is not found!');
   }
 
   const isBlocked = user.isBlocked; // Assuming isBlocked is boolean
 
   if (isBlocked) {
-    throw new AppError(StatusCodes.UNAUTHORIZED, 'Invalid credentials');
+    throw new AppError(403, 'Your account has been blocked.');
   }
 
   //checking if the password is correct

@@ -19,13 +19,13 @@ const globalErrorHandler: ErrorRequestHandler = ((
   next: NextFunction,
 ) => {
   // setting default values
-  let statusCode = err.statusCode || 400;
-  let message = err.message || 'Something went wrong!';
+  let statusCode = err.statusCode || 500;
+  let message = err.message || 'Internal Server Error!';
 
   let error: TErrorSources = [
     {
       path: '',
-      message: 'Something went wrong',
+      message: 'Internal Server Error!',
     },
   ];
 
@@ -62,6 +62,7 @@ const globalErrorHandler: ErrorRequestHandler = ((
 
   return res.status(statusCode).json({
     success: false,
+    statusCode,
     message,
     error,
     stack: config.NODE_ENV === 'development' ? err?.stack : null,
