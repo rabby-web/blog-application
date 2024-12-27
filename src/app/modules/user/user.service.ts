@@ -96,7 +96,7 @@ const deleteBlog = async (id: string) => {
     throw new AppError(404, 'Blog not found!');
   }
 
-  const result = await Blog.findByIdAndUpdate(id, { isDeleted: true });
+  const result = await Blog.findByIdAndDelete(id, { isDeleted: true });
 
   return result;
 };

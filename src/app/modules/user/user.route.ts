@@ -21,8 +21,7 @@ userRoutes.post(
 
 userRoutes.patch(
   '/users/:userId/block',
-  auth(USER_ROLE.user),
-  //   validateRequest(userValidationSchema.updateRegisterUserValidationSchema),
+  auth(USER_ROLE.admin),
   userController.userBlock,
 );
 
