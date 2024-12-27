@@ -43,7 +43,7 @@ const userBlock = catchAsync(async (req, res) => {
 
 const deleteBlog = catchAsync(async (req, res) => {
   const id = req.params.id;
-  await userService.deleteBlogFromDB(id);
+  await userService.deleteBlog(id);
 
   sendResponse(res, {
     statusCode: 200,

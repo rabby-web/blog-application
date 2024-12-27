@@ -5,6 +5,7 @@ import { IUser } from './user.interface';
 import User from './user.model';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import Blog from '../blog/blog.model';
 
 const register = async (payload: IUser) => {
   const user = await User.isUserExists(payload.email);
@@ -69,7 +70,7 @@ const userBlock = async (userId: string, payload: Partial<IUser>) => {
   }
 
   if (user?.role !== 'user') {
-    throw new AppError(403, "Only user roles can be blocked!");
+    throw new AppError(403, 'Only user roles can be blocked!');
   }
 
   if (user.isBlocked === true) {
@@ -87,8 +88,22 @@ const userBlock = async (userId: string, payload: Partial<IUser>) => {
   return result;
 };
 
+const deleteBlog = async (id: string) => {
+  // check blog is exists
+  const blog = await Blog.findById(id);
+
+  if (!blog) {
+    throw new AppError(404, 'Blog not found!');
+  }
+
+  const result = await Blog.findByIdAndUpdate(id, { isDeleted: true });
+
+  return result;
+};
+
 export const userService = {
   register,
   login,
   userBlock,
+  deleteBlog,
 };
