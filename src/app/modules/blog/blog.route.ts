@@ -22,6 +22,6 @@ blogRouters.delete(
   blogController.deleteBlog,
 );
 
-// blogRouters.get('/', blogController.getAllBlogs);
+blogRouters.get('/', blogController.getAllBlogs);
 
 export default blogRouters;
