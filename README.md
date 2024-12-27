@@ -66,7 +66,7 @@ This project provides the backend for a blogging platform where users can write,
    ```bash
    npm run start:dev
    ```
-5. Access the API at Vercel `https://blog-project-sigma-seven.vercel.app/`.
+5. Access the API at Vercel `https://blog-application-seven-xi.vercel.app/`.
 6. Access the API at Localhost `http://localhost:5000/`.
 
 ---
@@ -108,4 +108,4 @@ A consistent error response format is used across all API endpoints:
 
 ## Server live link
 
-[Blogs Website](https://blog-project-sigma-seven.vercel.app/)
+[Blogs Website](https://blog-application-seven-xi.vercel.app/)
