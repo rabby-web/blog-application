@@ -30,9 +30,22 @@ const updateBlog = catchAsync(async (req, res) => {
   });
 });
 
+// const deleteBlog = catchAsync(async (req, res) => {
+//   const id = req.params.id;
+//   await blogService.deleteBlog(id);
+
+//   sendResponse(res, {
+//     statusCode: 200,
+//     success: true,
+//     message: 'Blog deleted successfully',
+//     data: {},
+//   });
+// });
+
 const deleteBlog = catchAsync(async (req, res) => {
   const id = req.params.id;
-  await blogService.deleteBlog(id);
+  const userEmail = req?.user?.email;
+  await blogService.deleteBlog(id, userEmail);
 
   sendResponse(res, {
     statusCode: 200,
