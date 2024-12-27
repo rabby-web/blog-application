@@ -26,4 +26,10 @@ userRoutes.patch(
   userController.userBlock,
 );
 
+userRoutes.delete(
+  '/blogs/:id',
+  auth(USER_ROLE.admin),
+  userController.deleteBlog,
+);
+
 export default userRoutes;

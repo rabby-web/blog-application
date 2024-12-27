@@ -41,8 +41,21 @@ const userBlock = catchAsync(async (req, res) => {
   });
 });
 
+const deleteBlog = catchAsync(async (req, res) => {
+  const id = req.params.id;
+  await userService.deleteBlogFromDB(id);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Blog deleted successfully',
+    data: {},
+  });
+});
+
 export const userController = {
   register,
   login,
   userBlock,
+  deleteBlog,
 };
