@@ -35,7 +35,7 @@ const userBlock = catchAsync(async (req, res) => {
 
   await userService.userBlock(userId, updatedData);
   sendResponse(res, {
-    statusCode: StatusCodes.ACCEPTED,
+    statusCode: 200,
     success: true,
     message: 'User block successfully',
     data: {},
