@@ -9,7 +9,13 @@ import { IUserRole } from '../modules/user/user.interface';
 
 const auth = (...requiredRoles: IUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization?.split(' ')[1];
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith('Bearer')) {
+      throw new AppError(401, 'Invalid Credentials');
+    }
+
+    const token = authHeader.split(' ')[1];
     // checking if the token is missing
     if (!token) {
       // throw new Error('You are not authorized!');
@@ -37,7 +43,7 @@ const auth = (...requiredRoles: IUserRole[]) => {
     const isBlocked = user.isBlocked;
 
     if (isBlocked) {
-      throw new Error('This user is blocked!');
+      throw new AppError(403, 'Your account has been blocked!');
     }
 
     if (requiredRoles && !requiredRoles.includes(role)) {
